@@ -1,22 +1,26 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const app = express();
+const cookieParser = require('cookie-parser')
 const Twit = require('twit')
 const bodyParser = require('body-parser')
-
+const session = require('express-session')
+const flash = require('express-flash')
 const port = process.env.PORT || 5000
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars')
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }))
-
+app.use(cookieParser('keyboard cat'));
+app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(flash());
 
 const Twitter = new Twit({
-    // consumer_key:         'R6BOuu278nj6MNhO30RRcqk0V',
+    consumer_key:         'R6BOuu278nj6MNhO30RRcqk0V',
     // consumer_secret:      'Lm57sTNLoNAnKSA4feedWa9fv7WtUA8bezMIYVE8KeYXpnNoe5',
     // access_token:         '1929845604-vpD60mSrz0s1QvLXyuzaacvkjRtzwY05xYWtxp6',
     // access_token_secret:  'W8QQcF8j5MnOXuVrX0TuX8b9Gbs7Uaer0PZ6dV6JYxcN0',
-    consumer_key:         process.env.consumer_key,
+    // consumer_key:         process.env.consumer_key,
     consumer_secret:      process.env.consumer_secret,
     access_token:         process.env.access_token,
     access_token_secret:  process.env.access_token_secret
@@ -24,7 +28,7 @@ const Twitter = new Twit({
 
 app.get('/',(req,res)=>{
     
-    res.render('home')
+    res.render('home',{error: req.flash('error')})
 })
 
 app.post("/sendtweet",(req,res)=>{
@@ -33,7 +37,9 @@ app.post("/sendtweet",(req,res)=>{
         (async ()=>{
             try {
                 const data = await Twitter.post('statuses/update', { status: `${req.body.tweet}` })
-                res.send(data)
+                req.flash('info', 'Flash Message Added');
+                // res.send(data)
+                res.redirect('/')
             } catch (error) {
                 res.send(error)
             }

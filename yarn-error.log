@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add body-parser
+  /usr/local/bin/node /usr/local/bin/yarn add cookieParser
 
 PATH: 
   /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
@@ -14,8 +14,17 @@ Platform:
   linux x64
 
 Trace: 
-  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com registry.yarnpkg.com:443
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:58:26)
+  Error: https://registry.yarnpkg.com/cookieParser: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:62126:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:124482:22)
+      at Request.emit (events.js:182:13)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:125454:10)
+      at Request.emit (events.js:182:13)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:125376:12)
+      at Object.onceWrapper (events.js:273:13)
+      at IncomingMessage.emit (events.js:187:15)
+      at endReadableNT (_stream_readable.js:1094:12)
+      at process.internalTickCallback (internal/process/next_tick.js:72:19)
 
 npm manifest: 
   {
@@ -24,12 +33,15 @@ npm manifest:
     "description": "",
     "main": "index.js",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node index"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
+      "body-parser": "^1.19.0",
       "express": "^4.17.1",
+      "express-flash": "^0.0.2",
       "express-handlebars": "^3.1.0",
       "twit": "^2.2.11"
     }
@@ -115,7 +127,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.5.tgz#a8d0afd73251effbbd5fe384a77d73003c17a71f"
     integrity sha512-5am6HnnfN+urzt4yfg7IgTbotDjIT/u8AJpEt0sIU9FtXfVeezXAPKswrG+xKUCOYAINpSdgZVDU6QFh+cuH3w==
   
-  body-parser@1.19.0:
+  body-parser@1.19.0, body-parser@^1.19.0:
     version "1.19.0"
     resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.19.0.tgz#96b2709e57c9c4e09a6fd66a8fd979844f69f08a"
     integrity sha512-dhEPs72UPbDnAQJ9ZKMNTP6ptJaionhP5cBb541nXPlW60Jepo9RV/a4fX4XWW9CuFNK22krhrj1+rgzifNCsw==
@@ -165,6 +177,11 @@ Lockfile:
     version "0.0.1"
     resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
     integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
+  
+  connect-flash@0.1.x:
+    version "0.1.1"
+    resolved "https://registry.yarnpkg.com/connect-flash/-/connect-flash-0.1.1.tgz#d8630f26d95a7f851f9956b1e8cc6732f3b6aa30"
+    integrity sha1-2GMPJtlaf4UfmVax6MxnMvO2qjA=
   
   content-disposition@0.5.3:
     version "0.5.3"
@@ -256,6 +273,13 @@ Lockfile:
     version "1.8.1"
     resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
     integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
+  
+  express-flash@^0.0.2:
+    version "0.0.2"
+    resolved "https://registry.yarnpkg.com/express-flash/-/express-flash-0.0.2.tgz#23d1a8bcf3f90d707928e489f96869ecad0acda2"
+    integrity sha1-I9GovPP5DXB5KOSJ+Whp7K0KzaI=
+    dependencies:
+      connect-flash "0.1.x"
   
   express-handlebars@^3.1.0:
     version "3.1.0"

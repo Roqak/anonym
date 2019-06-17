@@ -17,6 +17,9 @@
                   <div class="col-lg-5 ml-auto aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
                     <form action="/sendtweet" method="post" class="form-box">
                       <h3 class="h4 text-black mb-4">Tweet</h3>
+                      {{#if messages.info}}
+                          <p><strong>FLASH!</strong> {{ messages.info }}</p>
+                      {{/if}}
                       <!-- <div class="form-group">
                         <input type="text" class="form-control" placeholder="Email Addresss">
                       </div> -->
