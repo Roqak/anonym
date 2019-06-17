@@ -4,7 +4,7 @@ const app = express();
 const Twit = require('twit')
 const bodyParser = require('body-parser')
 
-const port = 5000 || process.env.PORT
+const port = process.env.PORT || 5000
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars')
 app.use(express.static(__dirname + '/public'));
