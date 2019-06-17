@@ -4,7 +4,7 @@ const app = express();
 const Twit = require('twit')
 const bodyParser = require('body-parser')
 
-
+const port = 5000 || process.env.PORT
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars')
 app.use(express.static(__dirname + '/public'));
@@ -43,6 +43,6 @@ app.post("/sendtweet",(req,res)=>{
 
 
 
-app.listen(5000,()=>{
-    console.log("Listening..............")
+app.listen(port,()=>{
+    console.log(`Listening..............${port}`)
 })
